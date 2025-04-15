@@ -8,12 +8,11 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Chatbot\ChatbotController;
 use App\Http\Controllers\Chatbot\UserNameController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+
+Route::get('/', [AuthController::class, 'loginform'])->name('loginform');
 Route::get('/login', [AuthController::class, 'loginform'])->name('loginform');
-Route::get('/register', [AuthController::class, 'registerform'])->name('registerform');
+    Route::get('/register', [AuthController::class, 'registerform'])->name('registerform');
 Route::post('register', [AuthController::class, 'register'])->name('register');;
 Route::post('login', [AuthController::class, 'login'])->name('login');;
 
