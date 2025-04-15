@@ -253,6 +253,7 @@
     </div>
   </div>
   <!--start switcher-->
+  @yield('scripts')
 
   <!--bootstrap js-->
   <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>

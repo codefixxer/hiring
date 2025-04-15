@@ -2,67 +2,98 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        return view('admin.pages.users.index');  
 
-    }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
 
+
+    public function index()
     {
-        return view('admin.pages.users.create');  
-
+         $users = User::all();
+         return view('admin.pages.users.index', compact('users'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Show the form for creating a new user.
+     */
+    public function create()
+    {
+         return view('admin.pages.users.create');
+    }
+
+    /**
+     * Store a newly created user in storage.
      */
     public function store(Request $request)
     {
-        //
+         $data = $request->validate([
+             'name'     => 'required|string|max:255',
+             'email'    => 'required|email|unique:users,email',
+             'password' => 'required|string|min:6',
+             'role'     => 'required|in:employer,agent,employee'
+         ]);
+
+         // Hash the password before storing
+         $data['password'] = Hash::make($data['password']);
+
+         User::create($data);
+
+         return redirect()->route('admin.users.index')
+                          ->with('success', 'User created successfully.');
     }
 
     /**
-     * Display the specified resource.
+     * Show the form for editing the specified user.
      */
-    public function show(string $id)
+    public function edit($id)
     {
-        //
+         $user = User::findOrFail($id);
+         return view('admin.pages.users.create', compact('user'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Update the specified user in storage.
      */
-    public function edit(string $id)
+    public function update(Request $request, $id)
     {
-        //
+         $user = User::findOrFail($id);
+         $data = $request->validate([
+             'name'     => 'required|string|max:255',
+             'email'    => 'required|email|unique:users,email,'.$user->id,
+             'password' => 'nullable|string|min:6',
+             'role'     => 'required|in:employer,agent,employee'
+         ]);
+
+         // Hash the password only if a new one is provided.
+         if (!empty($data['password'])) {
+             $data['password'] = Hash::make($data['password']);
+         } else {
+             unset($data['password']);
+         }
+
+         $user->update($data);
+
+         return redirect()->route('admin.users.index')
+                          ->with('success', 'User updated successfully.');
     }
 
     /**
-     * Update the specified resource in storage.
+     * Remove the specified user from storage.
      */
-    public function update(Request $request, string $id)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+         $user = User::findOrFail($id);
+         $user->delete();
+         return redirect()->route('admin.users.index')
+                          ->with('success', 'User deleted successfully.');
     }
 }
