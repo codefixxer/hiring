@@ -1,73 +1,87 @@
-<div class="app-sidebar-menu">
-    <div class="h-100" data-simplebar>
-
-        <!--- Sidemenu -->
-        <div id="sidebar-menu">
-
-            <div class="logo-box">
-                <a href="{{ asset('index.html') }}" class="logo logo-light">
-                    <span class="logo-sm">
-                        <img src="{{ asset('assets/images/logo-sm.png') }}" alt="" height="22">
-                    </span>
-                    <span class="logo-lg">
-                        <img src="{{ asset('assets/images/logo-light.png') }}" alt="" height="24">
-                    </span>
-                </a>
-                <a href="{{ asset('index.html') }}" class="logo logo-dark">
-                    <span class="logo-sm">
-                        <img src="{{ asset('assets/images/logo-sm.png') }}" alt="" height="22">
-                    </span>
-                    <span class="logo-lg">
-                        <img src="{{ asset('assets/images/logo-dark.png') }}" alt="" height="24">
-                    </span>
-                </a>
-            </div>
-
-            <ul id="side-menu">
-
-                <li class="menu-title">Menu</li>
-
-                <li>
-                    <a href="{{ asset('#sidebarDashboards') }}" data-bs-toggle="collapse">
-                        <i data-feather="home"></i>
-                        <span> Dashboard </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarDashboards">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="{{ asset('index.html') }}" class="tp-link">CRM</a>
-                            </li>
-                            <li>
-                                <a href="{{ asset('analytics.html') }}" class="tp-link">Analytics</a>
-                            </li>
-                            <li>
-                                <a href="{{ asset('ecommerce.html') }}" class="tp-link">eCommerce</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="menu-title">Pages</li>
-
-            
-             
-                <li class="menu-title mt-2">Apps</li>
-                
-                <li>
-                    <a href="#" class="tp-link">
-                        <i data-feather="columns"></i>
-                        <span> Button </span>
-                    </a>
-                </li>
-
-               
-            </ul>
-
-        </div>
-        <!-- End Sidebar -->
-
-        <div class="clearfix"></div>
-
+<aside class="sidebar-wrapper" data-simplebar="true">
+    <div class="sidebar-header">
+      <div class="logo-icon">
+        <img src="{{ asset('assets/images/logo-icon.png') }}" class="logo-img" alt="">
+      </div>
+      <div class="logo-name flex-grow-1">
+        <h5 class="mb-0">Maxton</h5>
+      </div>
+      <div class="sidebar-close">
+        <span class="material-icons-outlined">close</span>
+      </div>
     </div>
-</div>
+    <div class="sidebar-nav">
+        <!--navigation-->
+        <ul class="metismenu" id="sidenav">
+
+
+
+
+
+
+
+
+
+
+            <li>
+                <a href="{{ route('admin.dashboard.index') }}">
+                  <div class="parent-icon"><i class="material-icons-outlined">home</i>
+                  </div>
+                  <div class="menu-title">Dashboard</div>
+                </a>
+              </li>
+    
+
+          <li class="menu-label">User Management</li>
+
+          <li>
+            <a href="javascript:;" class="has-arrow">
+              <div class="parent-icon"><i class="material-icons-outlined">home</i>
+              </div>
+              <div class="menu-title">Users</div>
+            </a>
+            <ul>
+              <li><a href="{{ route('admin.users.create') }}"><i class="material-icons-outlined">arrow_right</i>Create</a>
+              </li>
+              <li><a href="{{ route('admin.users.index') }}"><i class="material-icons-outlined">arrow_right</i>List</a>
+              </li>
+            </ul>
+          </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+          <li class="menu-label">Others</li>
+
+          <li>
+            <a href="javascrpt:;">
+              <div class="parent-icon"><i class="material-icons-outlined">support</i>
+              </div>
+              <div class="menu-title">Support</div>
+            </a>
+          </li>
+
+
+     
+
+      
+
+
+
+
+
+         </ul>
+        <!--end navigation-->
+    </div>
+  </aside>

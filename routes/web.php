@@ -1,8 +1,9 @@
 <?php
-use App\Http\Controllers\Auth\SocialController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\Auth\SocialController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Chatbot\ChatbotController;
 use App\Http\Controllers\Chatbot\UserNameController;
@@ -25,26 +26,60 @@ Route::get('login/google/callback', [SocialController::class, 'handleGoogleCallb
 Route::get('login/facebook', [SocialController::class, 'redirectToFacebook'])->name('facebook.login');
 Route::get('login/facebook/callback', [SocialController::class, 'handleFacebookCallback']);
 
-// Route to display the chat interface.
-Route::get('/chat', [UserNameController::class, 'index'])->name('chatname.index');
-Route::post('/chat/send', [UserNameController::class, 'sendMessage'])->name('chatname.post');
-
-
-
-Route::get('/chatbot', [ChatbotController::class, 'index'])->name('chatbot.index');
-Route::post('/chatbot/send', [ChatbotController::class, 'sendMessage'])->name('chatbot.post');
-
 
 
 Route::get('/error', [AuthController::class, 'error403'])->name('auth.errors.error403');
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Route::middleware(['auth'])->group(function () {
 
 
-    Route::prefix('admin')->middleware(['role:admin'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
+    Route::prefix('admin')->middleware(['role:admin'])->name('admin.')->group(function () {
+
+
+
+
+    Route::resource('dashboard', DashboardController::class);
+    Route::resource('users', UserController::class);
+
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
