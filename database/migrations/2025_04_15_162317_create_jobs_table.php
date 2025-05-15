@@ -10,10 +10,17 @@ class CreateJobsTable extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
-            // Assuming an employer is a user; adjust as needed if you have a separate employer table.
+
+            // Foreign key to employer
             $table->unsignedBigInteger('employer_id');
+
+            // Store multiple agent IDs as JSON
+            $table->json('agent_ids')->nullable();
+
+            // Job fields
             $table->string('job_title');
             $table->text('job_description');
+            $table->string('skills')->nullable(); // comma-separated string like "php,laravel,vue"
             $table->enum('preferred_gender', ['any', 'male', 'female', 'other'])->default('any');
             $table->integer('minimum_experience')->default(0);
             $table->string('education_level')->nullable();
@@ -25,9 +32,14 @@ class CreateJobsTable extends Migration
             $table->date('posting_date');
             $table->date('closing_date');
             $table->enum('status', ['active', 'draft', 'closed'])->default('draft');
+
             $table->timestamps();
 
-            $table->foreign('employer_id')->references('id')->on('users')->onDelete('cascade');
+            // Foreign key constraint
+            $table->foreign('employer_id')
+                  ->references('id')
+                  ->on('users')
+                  ->onDelete('cascade');
         });
     }
 

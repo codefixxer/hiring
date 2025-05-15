@@ -19,7 +19,7 @@ class CreateApplicationsTable extends Migration
             $table->decimal('expected_salary', 8, 2)->nullable();
             $table->date('available_start_date')->nullable();
             $table->string('remarks')->nullable();
-            $table->enum('status', ['applied','reviewed','accepted','rejected'])->default('applied');
+            $table->enum('status', ['applied','reviewed','accepted','rejected','confirmed'])->default('applied');
             $table->timestamps();
 
             $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');

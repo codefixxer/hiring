@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Maxton | Bootstrap 5 user Dashboard Template</title>
+  <title>Maxton | Bootstrap 5 employer Dashboard Template</title>
   <!--favicon-->
   <link rel="icon" href="{{ asset('assets/images/favicon-32x32.png') }}" type="image/png">
   <!-- loader-->
@@ -29,14 +29,18 @@
   <link href="{{ asset('assets/sass/bordered-theme.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/sass/responsive.css') }}" rel="stylesheet">
 
+
+
+
+  
 </head>
 
 <body>
 
   <!--start header-->
-@include('user.layouts.header')
+@include('employer.layouts.header')
   <!--end top header-->
-  @include('user.layouts.sidebar')
+  @include('employer.layouts.sidebar')
 
 
    <!--start sidebar-->
@@ -46,6 +50,18 @@
   <!--start main wrapper-->
   <main class="main-wrapper">
     <div class="main-content">
+
+   
+                    @if($errors->any())
+  <div class="alert alert-danger">
+    <ul class="mb-0">
+      @foreach($errors->all() as $err)
+        <li>{{ $err }}</li>
+      @endforeach
+    </ul>
+  </div>
+@endif
+
 @yield('content')
   <!--end main wrapper-->
     </div></main>
@@ -55,7 +71,7 @@
   <!--end overlay-->
 
    <!--start footer-->
-   @include('user.layouts.footer')
+   @include('employer.layouts.footer')
 
   <!--end footer-->
 

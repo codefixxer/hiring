@@ -1,26 +1,4 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 <!doctype html>
 <html lang="en" data-bs-theme="blue-theme">
@@ -133,6 +111,16 @@
                             <button type="button" class="btn btn-secondary"
                             onclick="fillLogin('u@u', 'a')">User</button>
 
+
+
+                             <button type="button" class="btn btn-secondary"
+                            onclick="fillLogin('e@e', 'e')">Employer</button>
+
+
+
+
+                            <button type="button" class="btn btn-secondary"
+                            onclick="fillLogin('a@g', 'a')">agent</button>
                     </div>
 
 

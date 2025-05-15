@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('agent.layouts.app')
 
 @section('content')
 <style>
@@ -11,25 +11,25 @@
     <ul class="nav nav-tabs" id="interviewTabs" role="tablist">
         <li class="nav-item" role="presentation">
             <a class="nav-link {{ $activeTab == 'pending' ? 'active' : '' }}" 
-               href="{{ route('admin.interviews.index', ['tab' => 'pending']) }}">
+               href="{{ route('agent.interviews.index', ['tab' => 'pending']) }}">
                Pending
             </a>
         </li>
         <li class="nav-item" role="presentation">
             <a class="nav-link {{ $activeTab == 'accepted' ? 'active' : '' }}" 
-               href="{{ route('admin.interviews.index', ['tab' => 'accepted']) }}">
+               href="{{ route('agent.interviews.index', ['tab' => 'accepted']) }}">
                Accepted
             </a>
         </li>
         <li class="nav-item" role="presentation">
             <a class="nav-link {{ $activeTab == 'postponed' ? 'active' : '' }}" 
-               href="{{ route('admin.interviews.index', ['tab' => 'postponed']) }}">
+               href="{{ route('agent.interviews.index', ['tab' => 'postponed']) }}">
                Postponed
             </a>
         </li>
         <li class="nav-item" role="presentation">
             <a class="nav-link {{ $activeTab == 'rejected' ? 'active' : '' }}" 
-               href="{{ route('admin.interviews.index', ['tab' => 'rejected']) }}">
+               href="{{ route('agent.interviews.index', ['tab' => 'rejected']) }}">
                Rejected
             </a>
         </li>
@@ -138,7 +138,7 @@
                         <!-- Accept Modal for Interview ID {{$interview->id}} -->
                         <div class="modal fade" id="acceptModal{{$interview->id}}" tabindex="-1" aria-labelledby="acceptModalLabel{{$interview->id}}" aria-hidden="true">
                           <div class="modal-dialog modal-dialog-centered">
-                            <form method="POST" action="{{ route('admin.interviews.update', $interview->id) }}">
+                            <form method="POST" action="{{ route('agent.interviews.update', $interview->id) }}">
                               @csrf
                               @method('PATCH')
                               <input type="hidden" name="status" value="accepted">
@@ -168,7 +168,7 @@
                         <!-- Reject Modal for Interview ID {{$interview->id}} -->
                         <div class="modal fade" id="rejectModal{{$interview->id}}" tabindex="-1" aria-labelledby="rejectModalLabel{{$interview->id}}" aria-hidden="true">
                           <div class="modal-dialog modal-dialog-centered">
-                            <form method="POST" action="{{ route('admin.interviews.update', $interview->id) }}">
+                            <form method="POST" action="{{ route('agent.interviews.update', $interview->id) }}">
                               @csrf
                               @method('PATCH')
                               <input type="hidden" name="status" value="rejected">
@@ -201,7 +201,7 @@
                         <!-- Postpone Modal for Interview ID {{$interview->id}} -->
                         <div class="modal fade" id="postponeModal{{$interview->id}}" tabindex="-1" aria-labelledby="postponeModalLabel{{$interview->id}}" aria-hidden="true">
                           <div class="modal-dialog modal-dialog-centered">
-                            <form method="POST" action="{{ route('admin.interviews.update', $interview->id) }}">
+                            <form method="POST" action="{{ route('agent.interviews.update', $interview->id) }}">
                               @csrf
                               @method('PATCH')
                               <input type="hidden" name="status" value="postponed">
@@ -278,13 +278,13 @@
                             </td>
                             <td>{{ $interview->remarks ?? 'N/A' }}</td>
                             <td>
-                                <a href="{{ route('admin.interviews.show', $interview->id) }}" class="btn btn-sm btn-info">
+                                <a href="{{ route('agent.interviews.show', $interview->id) }}" class="btn btn-sm btn-info">
                                     <i class="bi bi-eye"></i>
                                 </a>
-                                <a href="{{ route('admin.interviews.edit', $interview->id) }}" class="btn btn-sm btn-primary">
+                                <a href="{{ route('agent.interviews.edit', $interview->id) }}" class="btn btn-sm btn-primary">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
-                                <form action="{{ route('admin.interviews.destroy', $interview->id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('agent.interviews.destroy', $interview->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button onclick="return confirm('Delete interview?')" type="submit" class="btn btn-sm btn-danger">
@@ -334,13 +334,13 @@
                             </td>
                             <td>{{ $interview->remarks ?? 'N/A' }}</td>
                             <td>
-                                <a href="{{ route('admin.interviews.show', $interview->id) }}" class="btn btn-sm btn-info">
+                                <a href="{{ route('agent.interviews.show', $interview->id) }}" class="btn btn-sm btn-info">
                                     <i class="bi bi-eye"></i>
                                 </a>
-                                <a href="{{ route('admin.interviews.edit', $interview->id) }}" class="btn btn-sm btn-primary">
+                                <a href="{{ route('agent.interviews.edit', $interview->id) }}" class="btn btn-sm btn-primary">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
-                                <form action="{{ route('admin.interviews.destroy', $interview->id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('agent.interviews.destroy', $interview->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button onclick="return confirm('Delete interview?')" type="submit" class="btn btn-sm btn-danger">
@@ -390,13 +390,13 @@
                             </td>
                             <td>{{ $interview->remarks ?? 'N/A' }}</td>
                             <td>
-                                <a href="{{ route('admin.interviews.show', $interview->id) }}" class="btn btn-sm btn-info">
+                                <a href="{{ route('agent.interviews.show', $interview->id) }}" class="btn btn-sm btn-info">
                                     <i class="bi bi-eye"></i>
                                 </a>
-                                <a href="{{ route('admin.interviews.edit', $interview->id) }}" class="btn btn-sm btn-primary">
+                                <a href="{{ route('agent.interviews.edit', $interview->id) }}" class="btn btn-sm btn-primary">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
-                                <form action="{{ route('admin.interviews.destroy', $interview->id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('agent.interviews.destroy', $interview->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button onclick="return confirm('Delete interview?')" type="submit" class="btn btn-sm btn-danger">

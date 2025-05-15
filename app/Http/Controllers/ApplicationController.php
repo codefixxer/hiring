@@ -10,14 +10,14 @@ use Illuminate\Support\Facades\Auth;
 class ApplicationController extends Controller
 {
     /**
-     * Display a list of the authenticated employee's admin.pages.applications.
+     * Display a list of the authenticated employee's employer.pages.applications.
      */
     public function index()
     {
         $applications = Application::where('employee_id', Auth::id())
                                    ->with('job')
                                    ->get();
-        return view('admin.pages.applications.index', compact('applications'));
+        return view('employer.pages.applications.index', compact('applications'));
     }
     
     /**
@@ -30,7 +30,7 @@ class ApplicationController extends Controller
         if ($request->has('job_id')) {
             $job = Job::with('skills')->findOrFail($request->job_id);
         }
-        return view('admin.pages.applications.create', compact('job'));
+        return view('employer.pages.applications.create', compact('job'));
     }
     
     /**
@@ -66,7 +66,7 @@ class ApplicationController extends Controller
         
         Application::create($validatedData);
         
-        return redirect()->route('admin.applications.index')
+        return redirect()->route('employer.applications.index')
                          ->with('success', 'Application submitted successfully.');
     }
     
@@ -77,7 +77,7 @@ class ApplicationController extends Controller
     public function show($id)
     {
         $application = Application::with('job')->findOrFail($id);
-        return view('admin.pages.applications.show', compact('application'));
+        return view('employer.pages.applications.show', compact('application'));
     }
     
     /**
@@ -88,7 +88,7 @@ class ApplicationController extends Controller
         $application = Application::findOrFail($id);
         // Load the associated job (with skills) so we can display the checkboxes.
         $job = Job::with('skills')->findOrFail($application->job_id);
-        return view('admin.pages.applications.create', compact('application', 'job'));
+        return view('employer.pages.applications.create', compact('application', 'job'));
     }
     
     /**
@@ -122,7 +122,7 @@ class ApplicationController extends Controller
         
         $application->update($validatedData);
         
-        return redirect()->route('admin.applications.index')
+        return redirect()->route('employer.applications.index')
                          ->with('success', 'Application updated successfully.');
     }
     
@@ -135,7 +135,7 @@ class ApplicationController extends Controller
         $application = Application::findOrFail($id);
         $application->delete();
         
-        return redirect()->route('admin.pages.applications.index')
+        return redirect()->route('employer.pages.applications.index')
                          ->with('success', 'Application deleted successfully.');
     }
 
@@ -151,7 +151,7 @@ class ApplicationController extends Controller
             'status' => 'accepted'
         ]);
 
-        return redirect()->route('admin.applications.show', $id)
+        return redirect()->route('employer.applications.show', $id)
                          ->with('success', 'Application approved successfully.');
     }
 
@@ -174,7 +174,7 @@ class ApplicationController extends Controller
             'remarks' => $request->input('remarks')
         ]);
 
-        return redirect()->route('admin.applications.show', $id)
+        return redirect()->route('employer.applications.show', $id)
                          ->with('success', 'Application rejected with remarks.');
     }
 }

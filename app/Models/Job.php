@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class Job extends Model
 {
@@ -23,13 +24,35 @@ class Job extends Model
         'working_hours',
         'posting_date',
         'closing_date',
-        'status'
+        'status',
+        'skills',
+        'agent_ids',
+        'remarks',            
     ];
 
-    public function skills()
+    protected $casts = [
+        'agent_ids'    => 'array',
+        'posting_date' => 'date',
+        'closing_date' => 'date',
+    ];
+
+    /**
+     * The employer who owns this job.
+     */
+    public function employer()
     {
-        return $this->hasMany(JobSkill::class);
+        return $this->belongsTo(User::class, 'employer_id');
     }
+
+    /**
+     * The agents assigned to this job.
+     */
+    public function agents()
+    {
+        return User::whereIn('id', $this->agent_ids ?? [])->get();
+    }
+
+
 
     
 }

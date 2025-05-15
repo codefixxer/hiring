@@ -14,7 +14,7 @@ class CreateInterviewsTable extends Migration
             $table->dateTime('interview_start');
             $table->dateTime('interview_end');
             $table->string('interview_link');
-            $table->enum('status', ['accepted', 'rejected','postponed','pending']);
+            $table->enum('status', ['accepted', 'rejected','postponed','pending'])->default('pending');
             $table->string('remarks')->nullable();
             $table->timestamps();
             

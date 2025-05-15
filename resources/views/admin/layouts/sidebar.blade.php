@@ -27,7 +27,7 @@
                 <a href="{{ route('admin.dashboard.index') }}">
                   <div class="parent-icon"><i class="material-icons-outlined">home</i>
                   </div>
-                  <div class="menu-title">Dashboard</div>
+                  <div class="menu-title">Admin Dashboard</div>
                 </a>
               </li>
     
@@ -52,54 +52,23 @@
 
 
 
-          <li class="menu-label">Job Management</li>
 
           <li>
-            <a href="javascript:;" class="has-arrow">
-              <div class="parent-icon"><i class="material-icons-outlined">home</i>
-              </div>
-              <div class="menu-title">Jobs</div>
-            </a>
-            <ul>
-              <li><a href="{{ route('admin.jobs.create') }}"><i class="material-icons-outlined">arrow_right</i>Create</a>
-              </li>
-              <li><a href="{{ route('admin.jobs.index') }}"><i class="material-icons-outlined">arrow_right</i>List</a>
-              </li>
-              <li><a href="{{ route('admin.applications.index') }}"><i class="material-icons-outlined">arrow_right</i>Applications List</a>
-              </li>
-            </ul>
-          </li>
+  <a href="javascript:;">
+    <div class="parent-icon"><i class="material-icons-outlined">work_outline</i></div>
+    <div class="menu-title">View Jobs</div>
+  </a>
+</li>
 
-          <li class="menu-label">Interview Management</li>
+<li>
+  <a href="javascript:;">
+    <div class="parent-icon"><i class="material-icons-outlined">event_note</i></div>
+    <div class="menu-title">View Interviews</div>
+  </a>
+</li>
 
-          <li>
-            <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class="material-icons-outlined">home</i></div>
-                <div class="menu-title">Interviews</div>
-            </a>
-            <ul>
-                <li>
-                    <a href="{{ route('admin.interviews.index', ['tab' => 'pending']) }}">
-                        <i class="material-icons-outlined">arrow_right</i>Pending List
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('admin.interviews.index', ['tab' => 'accepted']) }}">
-                        <i class="material-icons-outlined">arrow_right</i>Approved List
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('admin.interviews.index', ['tab' => 'rejected']) }}">
-                        <i class="material-icons-outlined">arrow_right</i>Rejected List
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('admin.interviews.index', ['tab' => 'postponed']) }}">
-                        <i class="material-icons-outlined">arrow_right</i>Postponed List
-                    </a>
-                </li>
-            </ul>
-        </li>
+
+           
         
         
 

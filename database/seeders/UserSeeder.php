@@ -26,5 +26,24 @@ class UserSeeder extends Seeder
             'password' => Hash::make('a'),  // Admin password
             'role' => 'admin',  // Admin role
         ]);
+
+
+        // Create an agent user
+        User::create([
+            'name' => 'Agent User',
+            'email' => 'a@g',
+            'password' => Hash::make('a'),  // Agent password
+            'role' => 'agent',  // Agent role
+        ]);
+
+
+
+        // Create an admin user
+        User::create([
+            'name' => 'employer User',
+            'email' => 'e@e',
+            'password' => Hash::make('e'),  // employer password
+            'role' => 'employer',  // employer role
+        ]);
     }
 }

@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('employer.layouts.app')
 
 @section('content')
 <!-- Include Bootstrap Icons CSS if not already included -->
@@ -95,13 +95,13 @@
         </div>
         <!-- Footer with Action Buttons -->
         <div class="card-footer d-flex flex-wrap gap-2">
-            <a href="{{ route('admin.applications.edit', $application->id) }}" class="btn btn-primary">
+            <a href="{{ route('employer.applications.edit', $application->id) }}" class="btn btn-primary">
                 <i class="bi bi-pencil-square me-1"></i> Edit Application
             </a>
-            <a href="{{ route('admin.applications.index') }}" class="btn btn-secondary">
+            <a href="{{ route('employer.applications.index') }}" class="btn btn-secondary">
                 <i class="bi bi-arrow-left me-1"></i> Back to My Applications
             </a>
-            <form action="{{ route('admin.applications.destroy', $application->id) }}" method="POST" class="d-inline-block ms-auto">
+            <form action="{{ route('employer.applications.destroy', $application->id) }}" method="POST" class="d-inline-block ms-auto">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger"
@@ -125,7 +125,7 @@
 <!-- Approve Modal -->
 <div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <form id="approveInterviewForm" method="POST" action="{{ route('admin.interviews.store') }}">
+      <form id="approveInterviewForm" method="POST" action="{{ route('employer.interviews.store') }}">
         @csrf
         <!-- Hidden: application_id -->
         <input type="hidden" name="application_id" value="{{ $application->id }}">
@@ -183,7 +183,7 @@
 <!-- Reject Modal (For Application Rejection) -->
 <div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-    <form id="rejectForm" method="POST" action="{{ route('admin.applications.reject', $application->id) }}">
+    <form id="rejectForm" method="POST" action="{{ route('employer.applications.reject', $application->id) }}">
       @csrf
       @method('PATCH')
       <input type="hidden" name="status" value="rejected">

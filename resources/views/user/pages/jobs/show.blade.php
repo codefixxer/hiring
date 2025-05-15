@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('user.layouts.app')
 
 @section('content')
 <div class="container">
@@ -34,28 +34,35 @@
             <p><strong>Status:</strong> {{ ucfirst($job->status) }}</p>
             <p><strong>Salary Range:</strong> ${{ number_format($job->min_salary,2) }} - ${{ number_format($job->max_salary,2) }}</p>
             <hr>
+
             <h5>Required Skills:</h5>
-            @if($job->skills->isNotEmpty())
-            <div>
-                @foreach($job->skills as $skill)
-                    <span class="badge bg-secondary me-1" style="font-size: 1rem;">{{ $skill->skill_name }}</span>
-                @endforeach
-            </div>
+            @php
+                $skills = $job->skills ? explode(',', $job->skills) : [];
+            @endphp
+
+            @if(count($skills))
+                <div>
+                    @foreach($skills as $skill)
+                        <span class="badge bg-secondary me-1" style="font-size: 1rem;">
+                            {{ ucfirst(trim($skill)) }}
+                        </span>
+                    @endforeach
+                </div>
             @else
                 <p>No skills specified.</p>
             @endif
         </div>
-        <div class="card-footer">
-            <a href="{{ route('admin.jobs.edit', $job->id) }}" class="btn btn-primary">Edit</a>
-            <a href="{{ route('admin.jobs.index') }}" class="btn btn-secondary">Back to List</a>
-            <form action="{{ route('admin.jobs.destroy', $job->id) }}" method="POST" class="d-inline-block float-end">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger"
-                        onclick="return confirm('Are you sure you want to delete this job?');">
-                    Delete
-                </button>
-            </form>
+
+        <div class="card-footer d-flex justify-content-between">
+            <a href="{{ route('user.jobs.index') }}" class="btn btn-secondary">Back to List</a>
+
+            @auth
+                @if(auth()->user()->role === 'user')
+                   <a href="{{ route('user.applications.create', ['job_id' => $job->id]) }}"
+   class="btn btn-success">Apply</a>
+
+                @endif
+            @endauth
         </div>
     </div>
 </div>

@@ -1,11 +1,10 @@
-@extends('admin.layouts.app')
+@extends('user.layouts.app')
 
 @section('content')
 <h6 class="mb-0 text-uppercase">My Applications</h6>
 <hr>
 <div class="card">
     <div class="card-body">
-        <a href="{{ route('admin.applications.create') }}" class="btn btn-success mb-3">Apply for a Job</a>
         <div class="table-responsive">
             <table id="applicationsTable" class="table table-striped table-bordered" style="width:100%">
                 <thead>
@@ -35,16 +34,8 @@
                         <td>{{ ucfirst($application->status) }}</td>
                         <td>{{ $application->created_at->format('Y-m-d') }}</td>
                         <td>
-                            <a href="{{ route('admin.applications.show', $application->id) }}" class="btn btn-sm btn-info">View</a>
-                            <a href="{{ route('admin.applications.edit', $application->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                            <form action="{{ route('admin.applications.destroy', $application->id) }}" method="POST" style="display:inline-block;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger"
-                                onclick="return confirm('Are you sure you want to delete this application?')">
-                                    Delete
-                                </button>
-                            </form>
+                            <a href="{{ route('user.applications.show', $application->id) }}" class="btn btn-sm btn-info">View</a>
+                             
                         </td>
                     </tr>
                     @endforeach
